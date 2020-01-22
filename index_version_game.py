@@ -1,3 +1,6 @@
+global os_move
+global xs_move
+
 # Creating Grid
 grid = [
     [" ", " ", " "],
@@ -34,8 +37,7 @@ draw_line(grid)
 
 def o_making_move(k):
     if "a" in k:
-        if grid[0][int(k[1])-1] == " ":
-            grid[0][int(k[1])-1] = "o"
+        return grid[0][int(k[1])-1] == " "
         else:
             os_move = " "
             print("Oops! Try again.")
@@ -62,26 +64,27 @@ def x_making_move(k):
         else:
             xs_move = " "
             print("Oops! Try again.")
-            o_making_move(xs_move)
+            x_making_move(xs_move)
     if "b" in k:
         if grid[1][int(k[1])-1] == " ":
             grid[1][int(k[1])-1] = "x"
         else:
             xs_move = " "
             print("Oops! Try again.")
-            o_making_move(xs_move)
+            x_making_move(xs_move)
     if "c" in k:
         if grid[2][int(k[1])-1] == " ":
             grid[2][int(k[1])-1] = "x"
         else:
             xs_move = " "
             print("Oops! Try again.")
-            o_making_move(xs_move)
+            x_making_move(xs_move)
 
 
 while True:
-    os_move = input("o's turn: ")
-    o_making_move(os_move)
+    
+    while not(o_making_move(os_move)):
+        os_move = input("o's turn: ")
 
     draw_line(grid)
 
@@ -90,6 +93,7 @@ while True:
         break
 
     xs_move = input("x's turn: ")
+    
     x_making_move(xs_move)
 
     draw_line(grid)

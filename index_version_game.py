@@ -5,51 +5,94 @@ grid = [
     [" ", " ", " "]
 ]
 
-printable_grid = [
-    [grid[0][0],"  |", grid[0][1],"  |", grid[0][2]],
-    ["--- --- ---"],
-    [grid[1][0],"  |", grid[1][1],"  |", grid[1][2]],
-    ["--- --- ---"],
-    [grid[2][0],"  |", grid[2][1],"  |", grid[2][2]]
-]
+def draw_line(g):
+    printable = [
+        [" ", g[0][0]," | ", g[0][1]," | ", g[0][2]],
+        ["--- --- ---"],
+        [" ", g[1][0]," | ", g[1][1]," | ", g[1][2]],
+        ["--- --- ---"],
+        [" ", g[2][0]," | ", g[2][1]," | ", g[2][2]]
+    ]
+    for i in printable:
+        print(*i, sep="")
 
-for i in printable_grid:
-    print(*i, sep="")
+draw_line(grid)
+
+#printable_grid = [
+#    [" ", grid[0][0]," | ", grid[0][1]," | ", grid[0][2]],
+#    ["--- --- ---"],
+#    [" ", grid[1][0]," | ", grid[1][1]," | ", grid[1][2]],
+#    ["--- --- ---"],
+#    [" ", grid[2][0]," | ", grid[2][1]," | ", grid[2][2]]
+#]
+
+#for i in printable_grid:
+#    print(*i, sep="")
 
 #Creating game mechanism:
-won = False
 
 def o_making_move(k):
     if "a" in k:
-        grid[0][int(k[1])] == "o"
+        if grid[0][int(k[1])-1] == " ":
+            grid[0][int(k[1])-1] = "o"
+        else:
+            os_move = " "
+            print("Oops! Try again.")
+            o_making_move(os_move)
     if "b" in k:
-        grid[1][int(k[1])] == "o"
+        if grid[1][int(k[1])-1] == " ":
+            grid[1][int(k[1])-1] = "o"
+        else:
+            os_move = " "
+            print("Oops! Try again.")
+            o_making_move(os_move)
     if "c" in k:
-        grid[2][int(k[1])] == "o"
+        if grid[2][int(k[1])-1] == " ":
+            grid[2][int(k[1])-1] = "o"
+        else:
+            os_move = " "
+            print("Oops! Try again.")
+            o_making_move(os_move)
 
 def x_making_move(k):
     if "a" in k:
-        grid[0][int(k[1])] == "x"
+        if grid[0][int(k[1])-1] == " ":
+            grid[0][int(k[1])-1] = "x"
+        else:
+            xs_move = " "
+            print("Oops! Try again.")
+            o_making_move(xs_move)
     if "b" in k:
-        grid[1][int(k[1])] == "x"
+        if grid[1][int(k[1])-1] == " ":
+            grid[1][int(k[1])-1] = "x"
+        else:
+            xs_move = " "
+            print("Oops! Try again.")
+            o_making_move(xs_move)
     if "c" in k:
-        grid[2][int(k[1])] == "x" 
+        if grid[2][int(k[1])-1] == " ":
+            grid[2][int(k[1])-1] = "x"
+        else:
+            xs_move = " "
+            print("Oops! Try again.")
+            o_making_move(xs_move)
 
-   
-while not won:
+
+while True:
     os_move = input("o's turn: ")
     o_making_move(os_move)
-    for i in printable_grid:
-        print(*i, sep="")
-    if grid[0][0] == grid[0][1] == grid[0][2] == "o" or grid[1][0] == grid[1][1] == grid[0][2] == "o" or grid[2][0] == grid[2][1] == grid[2][2] == "o" or grid[0][0] == grid[1][0] == grid[1][0] == "o" or grid[0][1] == grid[1][1] == grid[2][1] == "o" or grid[0][2] == grid[1][2] == grid[2][2] == "o" or grid[0][0] == grid[1][1] == grid[2][2] == "o" or grid[0][2] == grid[1][1] == grid[0][2] == "o":
-        won = True
+
+    draw_line(grid)
+
+    if grid[0][0] == grid[0][1] == grid[0][2] == "o" or grid[1][0] == grid[1][1] == grid[1][2] == "o" or grid[2][0] == grid[2][1] == grid[2][2] == "o" or grid[0][0] == grid[1][0] == grid[2][0] == "o" or grid[0][1] == grid[1][1] == grid[2][1] == "o" or grid[0][2] == grid[1][2] == grid[2][2] == "o" or grid[0][0] == grid[1][1] == grid[2][2] == "o" or grid[0][2] == grid[1][1] == grid[2][0] == "o":
         print("o has won!")
+        break
 
     xs_move = input("x's turn: ")
     x_making_move(xs_move)
-    for i in printable_grid:
-        print(*i, sep="")
-    if grid[0][0] == grid[0][1] == grid[0][2] == "x" or grid[1][0] == grid[1][1] == grid[0][2] == "x" or grid[2][0] == grid[2][1] == grid[2][2] == "x" or grid[0][0] == grid[1][0] == grid[1][0] == "x" or grid[0][1] == grid[1][1] == grid[2][1] == "x" or grid[0][2] == grid[1][2] == grid[2][2] == "x" or grid[0][0] == grid[1][1] == grid[2][2] == "x" or grid[0][2] == grid[1][1] == grid[0][2] == "x":
-        won = True
-        print("x has won!")
 
+    draw_line(grid)
+
+    if grid[0][0] == grid[0][1] == grid[0][2] == "x" or grid[1][0] == grid[1][1] == grid[1][2] == "x" or grid[2][0] == grid[2][1] == grid[2][2] == "x" or grid[0][0] == grid[1][0] == grid[2][0] == "x" or grid[0][1] == grid[1][1] == grid[2][1] == "x" or grid[0][2] == grid[1][2] == grid[2][2] == "x" or grid[0][0] == grid[1][1] == grid[2][2] == "x" or grid[0][2] == grid[1][1] == grid[2][0] == "x":
+        print("x has won!")
+        break
